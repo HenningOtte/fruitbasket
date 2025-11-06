@@ -1,33 +1,27 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { empty } from 'rxjs';
+import { SingleFruit } from './singlefruit/singlefruit';
 
 @Component({
   selector: 'app-fruitlist',
-  imports: [CommonModule],
+  imports: [CommonModule, SingleFruit],
   templateUrl: './fruitlist.html',
   styleUrl: './fruitlist.scss',
 })
 export class Fruitlist {
-  getStarType(stars: number, count: number): string {
-    if (stars >= count) return 'full';
-    if (stars >= count - 0.5) return 'half';
-    return 'empty';
+  getRatingColor(stars: number): string {
+    return stars > 3 ? 'green' : 'red';
+  }
+
+  getStarClass(stars: number): { fontColorBad: boolean; fontColorGood: boolean } {
+    // return stars < 3 ? 'fontColorBad' : 'fontColorGood';
+    return {
+      fontColorBad: stars < 3,
+      fontColorGood: stars >= 3,
+    };
   }
 
   fruitlist = [
-    {
-      name: 'Apfel',
-      img: 'apple.png',
-      description:
-        'Äpfel sind aufgrund ihres hohen Wassergehalts kalorienarm und enthalten nur Spuren von Fett und Eiweiß, dafür aber rund zwei Prozent Ballaststoffe und etwa elf Prozent Kohlenhydrate. Äpfel enthalten auch viele Vitamine und Mineralstoffe und sind daher eine wichtige Quelle für uns - zum Beispiel für Vitamin C.',
-      genus: 'Kernobstgewächsen innerhalb der Familie der Rosengewächse',
-      stars: 2.3,
-      reviews: [
-        { name: 'Kevin W.', text: 'ist lecker' },
-        { name: 'Arne P.', text: 'nicht so meins' },
-      ],
-    },
     {
       name: 'Banane',
       img: 'banana.png',
